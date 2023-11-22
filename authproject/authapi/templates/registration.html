@@ -1,0 +1,116 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Registration</title>
+</head>
+<body>
+    <h1>Registration</h1>
+    <form id="registration-form" method="POST">
+        {{ form.as_p }}
+        <button type="submit">Register</button>
+    </form>
+
+    <script>
+        // document.getElementById('registration-form').addEventListener('submit', function (event) {
+        //     event.preventDefault();
+
+        //     // Serialize the form data
+        //     const formData = new FormData(event.target);
+
+        //     fetch('/registration/', {
+        //         method: 'POST',
+        //         body: formData,
+        //     })
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         if (data.access_token) {
+        //             // Registration successful, save access token to local storage
+        //             localStorage.setItem('access_token', data.access_token);
+
+        //             // Redirect to the home page or any desired URL
+        //             window.location.href = '/api/home/';
+        //         } else {
+        //             // Handle registration errors, e.g., display an error message
+        //             console.log('Registration failed:', data.error_message);
+        //         }
+        //     })
+        //     .catch(error => {
+        //         console.error('Registration request error:', error);
+        //     });
+        // });
+        document.getElementById('registration-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    // Serialize the form data
+    const formData = new FormData(event.target);
+
+    fetch('/registration/', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => {
+        console.log('Response received:', response);  // Log the response for debugging
+        return response.json();
+    })
+    .then(data => {
+        console.log('Data received:', data);  // Log the data for debugging
+
+        if (data.access_token) {
+            // Registration successful, save access token to local storage
+            localStorage.setItem('access_token', data.access_token);
+
+            // Redirect to the home page or any desired URL
+            window.location.href = '/api/home/';
+        } else {
+            // Handle registration errors, e.g., display an error message
+            console.log('Registration failed:', data.error_message);
+        }
+    })
+    .catch(error => {
+        console.error('Registration request error:', error);
+    });
+});
+
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration</title>
+</head>
+<body>
+    <h1>Registration</h1>
+    <form id="registration-form" method="POST">
+        {{ form.as_p }}
+        <button type="submit">Register</button>
+    </form>
+
+    <script>
+        document.getElementById('registration-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+
+            fetch('/registration/', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.access_token) {
+                    localStorage.setItem('access_token', data.access_token);
+                    window.location.href = '/api/home/';
+                } else {
+                    console.log('Registration failed:', data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Registration request error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
